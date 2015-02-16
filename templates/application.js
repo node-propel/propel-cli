@@ -40,14 +40,14 @@ function load(Propel) {
    * Default: ['./package.json']
    */
 
-  myApp.versionerFiles = myApp.genPath('.', ['package.json']);
+  myApp.versionerFiles = myApp.genPath(['package.json']);
 
   /**
    * Set path/to/file.json that you want to use for final package building
    * Default: './package.json'
    */
 
-  myApp.packageConfig = './package.json';
+  myApp.packageConfig = myApp.genPath('.', 'package.json');
 
   /**
    * Provide keys you would like to use for final packaged project name
