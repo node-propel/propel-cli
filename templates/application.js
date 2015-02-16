@@ -43,6 +43,13 @@ function load(Propel) {
   myApp.versionerFiles = myApp.genPath(['package.json']);
 
   /**
+   * Set a default version bump when not using interactive session
+   * Default: 'patch';
+   */
+
+  myApp.defaultVersionBump = 'patch';
+
+  /**
    * Set path/to/file.json that you want to use for final package building
    * Default: './package.json'
    */
