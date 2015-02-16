@@ -10,8 +10,10 @@
   "email": "nrgarg@outlook.com",
   "license": "MIT",
   "dependencies": {
+    "chalk": "^0.5.1",
     "commander": "^2.6.0",
     "fs-extra": "^0.16.3",
-    "lodash": "^3.2.0"
+    "lodash": "^3.2.0",
+    "propel-utilities": "0.0.2"
   }
 }
