@@ -9,6 +9,9 @@
   "author": "Navneet Garg",
   "email": "nrgarg@outlook.com",
   "license": "MIT",
+  "bin": {
+    "propel": "./bin/propel"
+  },
   "dependencies": {
     "chalk": "^0.5.1",
     "commander": "^2.6.0",
