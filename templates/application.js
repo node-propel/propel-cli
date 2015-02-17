@@ -8,25 +8,11 @@ function load(Propel) {
   var myApp = new Propel();
 
   /**
-   * The directories to find the assets
-   * Default: 'assets/{scripts, styles, images}'
-   */
-
-  myApp.assetPaths = myApp.genPath('assets', ['scripts', 'styles', 'images']);
-
-  /**
    *  If you have any external asset dependencies, just append it to the current set asset paths
    *  Default: [];
    */
 
-  myApp.appendAssets([]);
-
-  /**
-   *  establish the root directory of your application (where 'index.html' resides)
-   *  Default: 'views'
-   */
-
-  myApp.sourcePath = 'views';
+  myApp.addAssets([]);
 
   /**
    *  Set the view engine and extension used (if not 'html' files)
