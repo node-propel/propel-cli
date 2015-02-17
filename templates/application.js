@@ -1,17 +1,11 @@
 /**
  * Create your new static application
- * @type {Function}
  */
+
 exports = module.exports = load(require('propel'));
 
 function load(Propel) {
   var myApp = new Propel();
-  /**
-   *  establish the root directory of your application (where 'index.html' resides)
-   *  Default: 'views'
-   */
-
-  myApp.sourcePath = 'views';
 
   /**
    * The directories to find the assets
@@ -19,6 +13,20 @@ function load(Propel) {
    */
 
   myApp.assetPaths = myApp.genPath('assets', ['scripts', 'styles', 'images']);
+
+  /**
+   *  If you have any external asset dependencies, just append it to the current set asset paths
+   *  Default: [];
+   */
+
+  myApp.appendAssets([]);
+
+  /**
+   *  establish the root directory of your application (where 'index.html' resides)
+   *  Default: 'views'
+   */
+
+  myApp.sourcePath = 'views';
 
   /**
    *  Set the view engine and extension used (if not 'html' files)

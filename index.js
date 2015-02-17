@@ -24,9 +24,17 @@ function load(program, _, path, Generator) {
   program
     .command('start')
     .description('Start your propel application')
-    .option("-p, --prod, Run application in production mode. Starts static file server serving out of `build` directory")
+    .option("--prod")
+    .option("--port <port>")
+    .on('--help', function() {
+      console.log('  HELP');
+      console.log('  ----');
+      console.log('    start --prod          Run application in production mode. Starts static file server serving out of `build` directory');
+      console.log('    start --port <port>   Start application with given port. Defaults to application.js configuration"');
+      console.log('');
+    })
     .action(function(args) {
-      loadApp().run({ production: args.prod || false });
+      loadApp().run({ production: args.prod || false, port: _.parseInt(args.port) });
     });
 
   program
@@ -50,8 +58,8 @@ function load(program, _, path, Generator) {
     .option("-c, --config-file <config-file>")
     .option("-p, --properties [properties...]")
     .on('--help', function() {
-      console.log('HELP');
-      console.log('----');
+      console.log('  HELP');
+      console.log('  ----');
       console.log('    pkg -n                 Disable interactive terminal session. Flag to allow below options');
       console.log('    pkg -c <config-file>   Read from config file. Defaults to application.js configuration');
       console.log('    pkg -p [properties...] Indicate properties to read from config file (comma separated with no spaces)\n' +
@@ -73,8 +81,8 @@ function load(program, _, path, Generator) {
     .option("-t, --type <bump-type>")
     .option("-c, --custom <custom>")
     .on('--help', function() {
-      console.log('HELP');
-      console.log('----');
+      console.log('  HELP');
+      console.log('  ----');
       console.log('    bump -n                    Disable interactive terminal session. Flag to allow below options');
       console.log('    bump -f [version-files...] Supply list of files (comma separated string with no spaces) to apply version bump.\n' +
                   '                               Defaults to application.js configuration');
