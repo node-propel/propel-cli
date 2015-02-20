@@ -1,6 +1,6 @@
 {
   "name": "propel-cli",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "CLI runner for the propel framework",
   "main": "index.js",
   "scripts": {
