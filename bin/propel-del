@@ -1,1 +1,18 @@
 #!/usr/bin/env node
+var program = require('commander');
+var shell = require('shelljs');
+var path = require('path');
+var fs = require('fs');
+
+program
+  .usage('[template] [name]', String, String)
+  .action(function(template, name) {
+    if (typeof template === 'string' && typeof name === 'string') {
+      console.log('template: %s, name: %s', template, name);
+    }
+    else {
+      console.error('requires both template and name');
+      process.exit(1);
+    }
+  })
+  .parse(process.argv);

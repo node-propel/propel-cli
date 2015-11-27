@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 var program = require('commander');
-var version = require('../package.json').version;
 var shell = require('shelljs');
 var path = require('path');
 var fs = require('fs');
@@ -9,7 +8,6 @@ var spaURL = "git@github.com:node-propel/propel-spa.git";
 var current_path = path.resolve(process.cwd());
 
 program
-  .version(version)
   .usage('[options] [name]')
   .option('-s, --spa [name]', 'Initialize a propel-spa application')
   .option('-e, --express [name]', 'Initialize a propel-express application')
