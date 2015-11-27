@@ -1,0 +1,63 @@
+#!/usr/bin/env node
+var program = require('commander');
+var version = require('../package.json').version;
+var shell = require('shelljs');
+var path = require('path');
+var fs = require('fs');
+var expressURL = "git@github.com:node-propel/propel-express.git";
+var spaURL = "git@github.com:node-propel/propel-spa.git";
+var current_path = path.resolve(process.cwd());
+
+program
+  .version(version)
+  .usage('[options] [name]')
+  .option('-s, --spa [name]', 'Initialize a propel-spa application')
+  .option('-e, --express [name]', 'Initialize a propel-express application')
+  .parse(process.argv);
+
+if (program.spa) {
+  spa(program.spa);
+  modifyPKG(program.spa);
+}
+
+if (program.express) {
+  express(program.express);
+  modifyPKG(program.express);
+}
+
+function express(name) {
+  /**
+   * download the app
+   */
+  //console.log('Downloading propel-express application');
+  var cmd = 'git clone --depth=1 --branch=master ' + expressURL + ' ' + name + '; rm -rf ' + name + '/.git';
+
+  shell.exec(cmd);
+}
+
+function spa(name) {
+  /**
+   * download the app
+   */
+  //console.log('Downloading propel-spa application');
+  var cmd = 'git clone --depth=1 --branch=master ' + spaURL + ' ' + name + '; rm -rf ' + name + '/.git';
+
+  shell.exec(cmd);
+}
+
+function modifyPKG(name) {
+  /**
+   * modify the package.json with name of the app
+   */
+  var pkg = require(path.join(current_path, name, 'package.json'));
+  if (name === '.') {
+    pkg.name = path.basename(path.resolve(process.cwd()));
+  }
+  else {
+    pkg.name = name;
+  }
+  var data = JSON.stringify(pkg, null, 2) + '\n';
+  fs.writeFileSync(path.join(current_path, name, 'package.json'), data, 'utf-8');
+}
+
+function noop() {}

@@ -1,2 +1,10 @@
 #!/usr/bin/env node
-require('../').parse(process.argv);
+var program = require('commander');
+var version = require('../package.json').version;
+
+program
+  .version(version)
+  .command('init [options] [name]', 'Initialize a new propel application')
+  .command('gen [template] [name]', 'Generate a new [template] for your propel app')
+  .command('del [template] [name]', 'Delete the [name] module of type [template] from your propel app')
+  .parse(process.argv);
