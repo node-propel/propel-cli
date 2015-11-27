@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 var program = require('commander');
-var shell = require('shelljs');
 var path = require('path');
-var fs = require('fs');
+var current_path = path.resolve(process.cwd());
+var Generator = require("../lib/generator");
 
 program
   .usage('[template] [name]', String, String)
   .action(function(template, name) {
     if (typeof template === 'string' && typeof name === 'string') {
-      console.log('template: %s, name: %s', template, name);
+      new Generator(current_path, template, name).destroy();
     }
     else {
       console.error('requires both template and name');
@@ -16,4 +16,3 @@ program
     }
   })
   .parse(process.argv);
-
