@@ -50,6 +50,35 @@ program
   .option('-e, --express [app_name]', 'Initialize a propel-express application with [app_name]')
   .option('-s, --spa [app_name]', 'Initialize a propel-spa application [app_name]');
 
+program
+  .command('gen [template] [name]', 'generate new [template]')
+  .usage('[template] [name]')
+  .on('--help', function() {
+  })
+  .action(function(template, name) {
+    if (template && name) {
+      console.log(template);
+      console.log(name);
+    }
+    else {
+      console.error('Requires template module and name');
+      process.exit(1);
+    }
+  });
+
+program
+  .command('del [template] [name]', 'delete [template]')
+  .usage('[template] [name]')
+  .action(function(template, name) {
+    if (template && name) {
+      console.log(template);
+      console.log(name);
+    }
+    else {
+      console.error('Requires template module and name');
+      process.exit(1);
+    }
+  });
 
 exports.parse = function(args) {
   program.parse(args);
