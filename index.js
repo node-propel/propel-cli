@@ -15,7 +15,6 @@ function express(name) {
   var cmd = 'git clone --depth=1 --branch=master ' + expressURL + ' ' + name + '; rm -rf ' + name + '/.git';
 
   shell.exec(cmd);
-  shell.exec('echo "{ type: \'express\' }" > ' + path.join(current_path, name, '.propelrc'));
 }
 
 function spa(name) {
@@ -26,7 +25,6 @@ function spa(name) {
   var cmd = 'git clone --depth=1 --branch=master ' + spaURL + ' ' + name + '; rm -rf ' + name + '/.git';
 
   shell.exec(cmd);
-  shell.exec('echo "{ type: \'spa\' }" > ' + path.join(current_path, name, '.propelrc'));
 }
 
 function modifyPKG(name) {
