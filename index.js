@@ -44,29 +44,29 @@ function modifyPKG(name) {
   fs.writeFileSync(path.join(current_path, name, 'package.json'), data, 'utf-8');
 }
 
-program
-  .version(version);
+function noop() {}
 
 program
-  .usage('express [name]')
-  .command('express [name]')
-  .description('Initialize a propel-express application')
-  .action(function(name) {
-    if (name) {
-      express(name);
-      modifyPKG(name);
-    }
-  });
+  .version(version)
+  .usage('[options]')
+  .option('-e, --express [app_name]', 'Initialize a propel-express application with [app_name]')
+  .option('-s, --spa [app_name]', 'Initialize a propel-spa application [app_name]');
 
-program
-  .usage('spa [name]')
-  .command('spa [name]')
-  .description('Initialize a propel-spa application')
-  .action(function(name) {
-    if (name) {
-      spa(name);
-      modifyPKG(name);
-    }
-  });
 
-module.exports = program;
+exports.parse = function(args) {
+  program.parse(args);
+  var func = noop;
+  var name;
+  if (program.express) {
+    func = express;
+    name = program.express;
+  }
+  if (program.spa) {
+    func = spa;
+    name = program.spa;
+  }
+  if (name) {
+    func(name);
+    modifyPKG(name);
+  }
+};
