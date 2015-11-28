@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+var program = require('commander');
+var path = require('path');
+var current_path = path.resolve(process.cwd());
+var Generator = require("../lib/generator");
+
+program
+  .usage('[template] [name]', String, String)
+  .action(function(template, name) {
+    if (typeof template === 'string' && typeof name === 'string') {
+      new Generator(current_path, template, name).make();
+    }
+    else {
+      console.error('requires both template and name');
+      process.exit(1);
+    }
+  })
+  .parse(process.argv);

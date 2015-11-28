@@ -1,22 +1,20 @@
 {
   "name": "propel-cli",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "description": "CLI runner for the propel framework",
-  "main": "index.js",
+  "main": "",
+  "bin": "./bin/propel",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Navneet Garg",
-  "email": "nrgarg@outlook.com",
+  "email": "navneetgarg123@gmail.com",
   "license": "MIT",
   "bin": {
     "propel": "./bin/propel"
   },
   "dependencies": {
-    "chalk": "^0.5.1",
     "commander": "^2.6.0",
-    "fs-extra": "^0.16.3",
-    "lodash": "^3.2.0",
     "shelljs": "^0.5.3"
   },
   "repository": {

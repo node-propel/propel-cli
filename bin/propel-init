@@ -1,32 +1,46 @@
+#!/usr/bin/env node
 var program = require('commander');
 var shell = require('shelljs');
-var version = require('./package').version;
 var path = require('path');
 var fs = require('fs');
 var expressURL = "git@github.com:node-propel/propel-express.git";
 var spaURL = "git@github.com:node-propel/propel-spa.git";
 var current_path = path.resolve(process.cwd());
 
+program
+  .usage('[options] [name]')
+  .option('-s, --spa [name]', 'Initialize a propel-spa application')
+  .option('-e, --express [name]', 'Initialize a propel-express application')
+  .parse(process.argv);
+
+if (program.spa) {
+  spa(program.spa);
+  modifyPKG(program.spa);
+}
+
+if (program.express) {
+  express(program.express);
+  modifyPKG(program.express);
+}
+
 function express(name) {
   /**
    * download the app
    */
-  console.log('Downloading propel-express application');
+  //console.log('Downloading propel-express application');
   var cmd = 'git clone --depth=1 --branch=master ' + expressURL + ' ' + name + '; rm -rf ' + name + '/.git';
 
   shell.exec(cmd);
-  shell.exec('echo "{ type: \'express\' }" > ' + path.join(current_path, name, '.propelrc'));
 }
 
 function spa(name) {
   /**
    * download the app
    */
-  console.log('Downloading propel-spa application');
+  //console.log('Downloading propel-spa application');
   var cmd = 'git clone --depth=1 --branch=master ' + spaURL + ' ' + name + '; rm -rf ' + name + '/.git';
 
   shell.exec(cmd);
-  shell.exec('echo "{ type: \'spa\' }" > ' + path.join(current_path, name, '.propelrc'));
 }
 
 function modifyPKG(name) {
@@ -45,28 +59,3 @@ function modifyPKG(name) {
 }
 
 function noop() {}
-
-program
-  .version(version)
-  .usage('[options]')
-  .option('-e, --express [app_name]', 'Initialize a propel-express application with [app_name]')
-  .option('-s, --spa [app_name]', 'Initialize a propel-spa application [app_name]');
-
-
-exports.parse = function(args) {
-  program.parse(args);
-  var func = noop;
-  var name;
-  if (program.express) {
-    func = express;
-    name = program.express;
-  }
-  if (program.spa) {
-    func = spa;
-    name = program.spa;
-  }
-  if (name) {
-    func(name);
-    modifyPKG(name);
-  }
-};
